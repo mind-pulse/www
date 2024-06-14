@@ -14,12 +14,14 @@
 
 ```bash
 pnpm i
+bun install
 ```
 
 ### 1.2 打包
 
 ```bash
 pnpm build
+bun run build
 ```
 
 打包产物在项目根目录的`dist`目录中，根据自己的实际需求将产物上传。
