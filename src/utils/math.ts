@@ -47,7 +47,7 @@ export const roundToDecimalPlaces = (
     return 0;
   }
 
-  const multiplier = Math.pow(10, decimalPlaces);
+  const multiplier = 10 ** decimalPlaces;
   const rounded = Math.round(number * multiplier);
   const result = rounded / multiplier;
 
@@ -75,9 +75,8 @@ export const maxIndex = <T extends Record<K, number>, K extends keyof T>(
   return array.reduce((i, currentObj, currentIndex, arr) => {
     if (currentObj[property] > arr[i][property]) {
       return currentIndex; // 更新最大值的索引
-    } else {
-      return i;
     }
+    return i;
   }, 0);
 };
 
@@ -215,7 +214,7 @@ export class ExpressionCalculator {
 
       if (this.operators.includes(char) || char === "(" || char === ")") {
         if (currentToken !== "") {
-          if (!isNaN(Number.parseFloat(currentToken))) {
+          if (!Number.isNaN(Number.parseFloat(currentToken))) {
             tokens.push(Number.parseFloat(currentToken));
           } else {
             tokens.push(currentToken); // Preserve variable names
@@ -229,7 +228,7 @@ export class ExpressionCalculator {
     }
 
     if (currentToken !== "") {
-      if (!isNaN(Number.parseFloat(currentToken))) {
+      if (!Number.isNaN(Number.parseFloat(currentToken))) {
         tokens.push(Number.parseFloat(currentToken));
       } else {
         tokens.push(currentToken); // Preserve variable names
@@ -259,6 +258,7 @@ export class ExpressionCalculator {
               ] as keyof typeof this.operatorPrecedence
             ]
         ) {
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           outputQueue.push(operatorStack.pop()!);
         }
         operatorStack.push(token);
@@ -269,6 +269,7 @@ export class ExpressionCalculator {
           operatorStack.length > 0 &&
           operatorStack[operatorStack.length - 1] !== "("
         ) {
+          // biome-ignore lint/style/noNonNullAssertion: <explanation>
           outputQueue.push(operatorStack.pop()!);
         }
         operatorStack.pop(); // Pop the '('
@@ -278,6 +279,7 @@ export class ExpressionCalculator {
     }
 
     while (operatorStack.length > 0) {
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
       outputQueue.push(operatorStack.pop()!);
     }
 
@@ -293,7 +295,9 @@ export class ExpressionCalculator {
       } else if (token in this.variables) {
         stack.push(this.variables[token]);
       } else {
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const b = stack.pop()!;
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         const a = stack.pop()!;
 
         switch (token) {

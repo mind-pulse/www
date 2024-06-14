@@ -36,6 +36,7 @@ const Scale = () => {
 
   const [instruction, setInstruction] = useState<ReactNode[]>([
     <NoticeBar
+      key={0}
       color="alert"
       content="您的测试结果本网站不会保存，请一定根据自己的实际情况回答，否则测试结果不具有参考性。"
     />,
@@ -51,7 +52,7 @@ const Scale = () => {
     if (scale) return;
 
     api<Scale<InferQuestion<typeof path>, InferInterpretation<typeof path>>>(
-      "/" + path,
+      `/${path}`,
     ).then((data) => {
       if (data instanceof Error) {
         setError({
@@ -85,7 +86,7 @@ const Scale = () => {
   };
 
   const toNext = useCallback(() => {
-    currentIndex < scale!.questions.length - 1 &&
+    currentIndex < (scale?.questions.length ?? 0) - 1 &&
       values[currentIndex] !== undefined && // 防止用户点击太快向 values 添加 undefined
       setCurrentIndex((prev) => prev + 1);
 
@@ -93,6 +94,7 @@ const Scale = () => {
     currentIndex + 1 === values.length && turnOnAutoNext();
   }, [currentIndex, scale, turnOnAutoNext, values]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     // 有多选题的量表不自动切换下一题
     if (
@@ -144,9 +146,9 @@ const Scale = () => {
   }
 
   const onSubmit = () => {
-    const result = calculateResult!(values);
+    const result = calculateResult?.(values);
 
-    api("/statistics?scale=" + path + "&clientType=2");
+    api(`/statistics?scale=${path}&clientType=2`);
 
     switch (path) {
       case "scl90":
@@ -156,7 +158,7 @@ const Scale = () => {
       case "epq_rsc":
       case "neo_pi_r":
       case "h_sds":
-        navigate("/result/" + path, {
+        navigate(`/result/${path}`, {
           replace: true,
           state: {
             result,
@@ -166,13 +168,13 @@ const Scale = () => {
         });
         return;
       default: {
-        const result = calculateResult!(values) as InferResult<typeof path>;
+        const result = calculateResult?.(values) as InferResult<typeof path>;
 
         const interpretation = (
           scale?.interpretation as CommonInterpretation
         ).find((v) => result >= v.range[0] && result <= v.range[1]);
 
-        navigate("/result/" + path, {
+        navigate(`/result/${path}`, {
           replace: true,
           state: {
             name: scale.name,
@@ -397,7 +399,7 @@ const Scale = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <span>{currentIndex + 1 + "/" + scale.questions.length}</span>
+                  <span>{`${currentIndex + 1}/${scale.questions.length}`}</span>
                 </Grid.Item>
                 <Grid.Item span={5}>
                   <Button

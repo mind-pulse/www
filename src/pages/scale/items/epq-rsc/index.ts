@@ -88,6 +88,7 @@ export const calculateEpqRscResult = (
     { P: 0, N: 0, E: 0, L: 0 },
   );
 
+  // biome-ignore lint/style/noNonNullAssertion: <explanation>
   const record = normGender.find((v) =>
     v.range[1] ? age >= v.range[0] && age <= v.range[1] : age >= v.range[0],
   )!;
@@ -137,15 +138,13 @@ export const getTemperament = (
 ): EpqRscResultKindDescription => {
   if (e < 50) {
     if (n < 50) {
-      return { name: "粘液质", desc: temperaments["phlegmatic"] };
-    } else {
-      return { name: "抑郁质", desc: temperaments["melancholic"] };
+      return { name: "粘液质", desc: temperaments.phlegmatic };
     }
+    return { name: "抑郁质", desc: temperaments.melancholic };
   }
 
   if (n < 50) {
-    return { name: "多血质", desc: temperaments["sanguine"] };
-  } else {
-    return { name: "胆汁质", desc: temperaments["choleric"] };
+    return { name: "多血质", desc: temperaments.sanguine };
   }
+  return { name: "胆汁质", desc: temperaments.choleric };
 };

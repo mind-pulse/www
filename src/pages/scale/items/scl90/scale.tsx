@@ -18,6 +18,7 @@ const SCL90Scale = ({
   setValues,
   setCalculateResult,
 }: Scl90Props) => {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     import.meta.env.MODE === "development" &&
       values.length < scale.questions.length &&

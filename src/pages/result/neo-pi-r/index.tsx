@@ -37,7 +37,7 @@ const SubdimensionInterpretation = ({
           {subdimensionInterpretations.map((sd) => (
             <Collapse.Panel
               key={sd.dimension}
-              title={sd.name + "(" + sd.dimension + ")"}
+              title={`${sd.name}(${sd.dimension})`}
             >
               <div style={{ marginBottom: "1rem" }}>{sd.description}</div>
 
@@ -118,7 +118,7 @@ const Result = () => {
             <Card
               key={d.dimension}
               style={{ marginTop: 12 }}
-              title={d.name + "(" + d.dimension + ")"}
+              title={`${d.name}(${d.dimension})`}
             >
               <div className="indent" style={{ marginBottom: "1rem" }}>
                 {d.description}

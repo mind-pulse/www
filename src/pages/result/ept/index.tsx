@@ -76,9 +76,7 @@ const EptResult = () => {
         title="必读"
         warning={
           typeIndexes.length > 1
-            ? "本测试通常不会有两个或以上结果，但您的测试结果存在 " +
-              `${typeIndexes.length} 个匹配的人格类型，故本次测试` +
-              "可能不具参考性，请重新认真测试。"
+            ? `本测试通常不会有两个或以上结果，但您的测试结果存在 ${typeIndexes.length} 个匹配的人格类型，故本次测试可能不具参考性，请重新认真测试。`
             : undefined
         }
         content={originalInterpretation.dialog.concat([

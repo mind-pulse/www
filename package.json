@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "stage": "vite preview --mode staging",
-    "build": "tsc && vite build",
+    "build": "biome check --write src && tsc && vite build",
     "check": "biome check --write src",
     "preview": "vite preview"
   },

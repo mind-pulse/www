@@ -30,6 +30,7 @@ const YBocsScale = ({
     });
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     setCalculateResult(() => {
       return (numbers: number[]): YBocsResult => {

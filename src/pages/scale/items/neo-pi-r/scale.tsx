@@ -22,7 +22,7 @@ const NEOPiRScale = ({
 }: NEOPiRProps) => {
   const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(
-    import.meta.env.MODE === "development" ? false : true,
+    import.meta.env.MODE !== "development",
   );
   const [gender, setGender] = useState<Gender | null>(null);
 
@@ -48,6 +48,7 @@ const NEOPiRScale = ({
     });
   }, [gender, scale.interpretation, setCalculateResult]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (
       import.meta.env.MODE === "development" &&

@@ -20,7 +20,7 @@ const EqpRscQuestion = ({
 
   useEffect(() => {
     setSelected(value?.point);
-  }, [index, title, value]);
+  }, [value]);
 
   const handleChange = (v: number) => {
     setSelected(v);

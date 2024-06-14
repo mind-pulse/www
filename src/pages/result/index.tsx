@@ -76,10 +76,10 @@ const Result = () => {
   return (
     <div className="main">
       <Nav
-        title={location.state.name + "结果"}
+        title={`${location.state.name}结果`}
         backArrow={<HomeOutlined />}
         onBack={toHome}
-        className={path + "-result-nav"}
+        className={`${path}-result-nav`}
         showDonateOnLoad
         buttonFill={["neo_pi_r", "h_sds"].includes(path) ? "solid" : "none"}
       />
@@ -87,7 +87,7 @@ const Result = () => {
       <NoticeBar
         wrap
         color="info"
-        className={path + "-result-notice"}
+        className={`${path}-result-notice`}
         content="您的测试结果本网站不会保存，如果需要保存请截图。"
       />
 

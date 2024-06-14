@@ -33,11 +33,12 @@ const EpqRscScale = ({
   const navigate = useNavigate();
 
   const [showDialog, setShowDialog] = useState(
-    import.meta.env.MODE === "development" ? false : true,
+    import.meta.env.MODE !== "development",
   );
   const [gender, setGender] = useState<keyof EpqRscNorm | null>(null);
   const [age, setAge] = useState(0);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setCalculateResult(() => {
       return (vs: EpqRscValue[]) => {
@@ -56,6 +57,7 @@ const EpqRscScale = ({
           );
         }
 
+        // biome-ignore lint/style/noNonNullAssertion: <explanation>
         return calculateEpqRscResult(vs, age, norm[gender!]);
       };
     });
@@ -71,6 +73,7 @@ const EpqRscScale = ({
     });
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     process.env.NODE_ENV === "development" &&
       values.length < scale.questions.length &&

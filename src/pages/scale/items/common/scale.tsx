@@ -27,6 +27,7 @@ const CommonQuestion = ({
     });
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     import.meta.env.MODE === "development" &&
       values.length < scale.questions.length &&

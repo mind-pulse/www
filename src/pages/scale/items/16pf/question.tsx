@@ -20,6 +20,7 @@ const SPFQuestion = ({
     value?.optionIndex === undefined ? undefined : value.optionIndex,
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     setSelected(value?.optionIndex);
   }, [index, title, value]);

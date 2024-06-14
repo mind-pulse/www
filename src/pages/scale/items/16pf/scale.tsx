@@ -28,6 +28,7 @@ const SPFQuestion = ({
     });
   };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
     import.meta.env.MODE === "development" &&
       values.length < scale.questions.length &&

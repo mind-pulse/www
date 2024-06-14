@@ -70,7 +70,7 @@ const Scl90Result = () => {
     <div className="container text">
       <Alert
         content={[
-          <NoticeBar content={WARNING} wrap color="alert" />,
+          <NoticeBar key={0} content={WARNING} wrap color="alert" />,
           "本测试仅适用于初步的症状筛选，存在一定的误差。如果您的测试结果中有某些因子为阳性，则需要选择对应症状的专用测试或去寻找心理医生进行进一步评估。",
         ]}
         defaultShow={true}

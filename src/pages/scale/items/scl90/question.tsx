@@ -20,6 +20,7 @@ const Scl90Question = ({
     value ? value.point : undefined,
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setSelected(value?.point);
   }, [index, title, value]);

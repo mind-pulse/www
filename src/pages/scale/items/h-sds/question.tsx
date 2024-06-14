@@ -25,6 +25,7 @@ const Scl90Question = ({
       : undefined,
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     setSelected(
       value

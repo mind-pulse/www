@@ -47,7 +47,7 @@ export const calculateScl90Result = (values: Scl90Value[]): Scl90Result => {
   const symptoms = { ...SCL90_DEFAULT_SYMPTOMS };
 
   // Calculate total, positiveAmount, and symptoms' totals
-  values.forEach(({ point, symptom }) => {
+  for (const { point, symptom } of values) {
     total += point;
     symptoms[symptom].amount += 1;
     symptoms[symptom].total += point;
@@ -55,7 +55,7 @@ export const calculateScl90Result = (values: Scl90Value[]): Scl90Result => {
       positiveAmount += 1;
       positiveTotal += point;
     }
-  });
+  }
 
   return {
     total,

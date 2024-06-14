@@ -17,6 +17,7 @@ const HSDSScale = ({
   setValues,
   setCalculateResult,
 }: HSDSProps) => {
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     const questionType = scale.questions[currentIndex].question_type;
 
@@ -35,6 +36,7 @@ const HSDSScale = ({
       });
   }, [values, currentIndex]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
   useEffect(() => {
     if (
       import.meta.env.MODE === "development" &&
@@ -63,13 +65,13 @@ const HSDSScale = ({
           [K in HSDSCapacityCategoryType]: number;
         };
 
-        vs.forEach((v) => {
+        for (const v of vs) {
           const selected = v.selected;
 
           sums[v.capacity_category] =
             (sums[v.capacity_category] ?? 0) +
             (typeof selected === "number" ? selected : selected.length);
-        });
+        }
 
         const result: HSDSResult = (
           Object.keys(sums) as HSDSCapacityCategoryType[]

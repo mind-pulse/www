@@ -62,13 +62,13 @@ export const calculateEptResult = (values: EptValue[]): EptResult => {
     return obj;
   }, {} as EptValues);
 
-  values.forEach(({ type, point }) => {
+  for (const { type, point } of values) {
     if (point === 1) {
       initValues[type].total.yes += 1;
     } else {
       initValues[type].total.no += 1;
     }
-  });
+  }
 
   const result = types.map(({ type, label }) => ({
     type,
