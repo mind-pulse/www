@@ -1,9 +1,9 @@
-import { Button } from 'antd-mobile'
-import type { ReactNode } from 'react'
+import { Button } from "antd-mobile";
+import type { ReactNode } from "react";
 
 interface IdeaProps {
-  content: ReactNode[]
-  hide: () => void
+  content: ReactNode[];
+  hide: () => void;
 }
 
 const Idea = ({ content, hide }: IdeaProps) => {
@@ -11,9 +11,9 @@ const Idea = ({ content, hide }: IdeaProps) => {
     <div>
       <div
         style={{
-          textAlign: 'center',
-          fontSize: '2rem',
-          fontWeight: 'bold',
+          textAlign: "center",
+          fontSize: "2rem",
+          fontWeight: "bold",
         }}
       >
         理念介绍
@@ -21,7 +21,7 @@ const Idea = ({ content, hide }: IdeaProps) => {
 
       <div className="indent text">
         {content.map((s, i) => (
-          <div key={i} style={{ marginTop: '1rem' }}>
+          <div key={i.toString()} style={{ marginTop: "1rem" }}>
             {s}
           </div>
         ))}
@@ -31,12 +31,12 @@ const Idea = ({ content, hide }: IdeaProps) => {
         color="primary"
         block
         onClick={hide}
-        style={{ marginTop: '2rem' }}
+        style={{ marginTop: "2rem" }}
       >
         开始测试
       </Button>
     </div>
-  )
-}
+  );
+};
 
-export default Idea
+export default Idea;

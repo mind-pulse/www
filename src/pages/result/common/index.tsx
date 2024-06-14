@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
 import { Divider } from "antd-mobile";
+import { useLocation } from "react-router-dom";
 import suspense from "~/advance/suspense";
 import { LazyCircle } from "~/pages";
 
@@ -33,7 +33,7 @@ const Result = () => {
 
           <div className="text-box">
             {symptom.map((s, i) => (
-              <div className="symptom-text indent" key={i}>
+              <div className="symptom-text indent" key={i.toString()}>
                 {s}
               </div>
             ))}
@@ -47,7 +47,7 @@ const Result = () => {
 
           <div className="text-box">
             {advice.map((s, i) => (
-              <div key={i} className="indent">
+              <div key={i.toString()} className="indent">
                 {s}
               </div>
             ))}

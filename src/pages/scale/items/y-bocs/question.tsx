@@ -1,11 +1,11 @@
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends CommonQuestion {
-  value?: number
-  updateValues: (index: number, point: number) => void
-  index: number
-  setIndex: SetStateAction<number>
+  value?: number;
+  updateValues: (index: number, point: number) => void;
+  index: number;
+  setIndex: SetStateAction<number>;
 }
 
 const YBocsQuestion = ({
@@ -19,16 +19,16 @@ const YBocsQuestion = ({
   const handleChange = (v: number) => {
     if ((index === 0 || index === 5) && v === 0) {
       for (let i = index; i < 5 + index; i++) {
-        updateValues(i, 0)
+        updateValues(i, 0);
       }
 
-      setIndex(index + 5 > 9 ? 9 : 5)
+      setIndex(index + 5 > 9 ? 9 : 5);
 
-      return
+      return;
     }
 
-    updateValues(index, v)
-  }
+    updateValues(index, v);
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -38,7 +38,7 @@ const YBocsQuestion = ({
       handleChange={handleChange}
       options={options}
     />,
-  )
-}
+  );
+};
 
-export default YBocsQuestion
+export default YBocsQuestion;

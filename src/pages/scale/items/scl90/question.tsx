@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import { useEffect, useState } from "react";
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends Scl90Question {
-  value?: Scl90Value // 默认值或已选择值
-  updateValues: (index: number, value: Scl90Value) => void
-  index: number
+  value?: Scl90Value; // 默认值或已选择值
+  updateValues: (index: number, value: Scl90Value) => void;
+  index: number;
 }
 
 const Scl90Question = ({
@@ -18,17 +18,17 @@ const Scl90Question = ({
 }: QuestionProps) => {
   const [selected, setSelected] = useState<number | undefined>(
     value ? value.point : undefined,
-  )
+  );
 
   useEffect(() => {
-    setSelected(value?.point)
-  }, [index, title, value])
+    setSelected(value?.point);
+  }, [index, title, value]);
 
   const handleChange = (v: number) => {
-    setSelected(v)
+    setSelected(v);
 
-    updateValues(index, { symptom, point: v })
-  }
+    updateValues(index, { symptom, point: v });
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -39,7 +39,7 @@ const Scl90Question = ({
       options={options}
       useIndex={false}
     />,
-  )
-}
+  );
+};
 
-export default Scl90Question
+export default Scl90Question;

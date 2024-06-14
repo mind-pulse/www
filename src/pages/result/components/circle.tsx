@@ -1,5 +1,5 @@
 import { AutoCenter } from "antd-mobile";
-import React from "react";
+import type React from "react";
 
 interface CircleProps {
   text: string | number;

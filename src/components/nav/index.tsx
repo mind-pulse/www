@@ -1,20 +1,20 @@
-import { useEffect, useState } from 'react'
-import type { ReactNode } from 'react'
-import { NavBar, Button, Modal, ImageViewer, Space, Image } from 'antd-mobile'
-import type { ButtonProps } from 'antd-mobile'
-import Alipay from '~/assets/alipay.webp'
-import Wechat from '~/assets/wechat.webp'
-import WeappCode from '~/assets/weapp-code.webp'
-import './index.scss'
+import { Button, Image, ImageViewer, Modal, NavBar, Space } from "antd-mobile";
+import type { ButtonProps } from "antd-mobile";
+import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
+import Alipay from "~/assets/alipay.webp";
+import WeappCode from "~/assets/weapp-code.webp";
+import Wechat from "~/assets/wechat.webp";
+import "./index.scss";
 
 interface NavProps {
-  title: string
-  backArrow?: boolean | ReactNode
-  showDonateOnLoad?: boolean
-  showWeAppCodeOnLoad?: boolean
-  onBack?: () => void
-  className?: string
-  buttonFill?: ButtonProps['fill']
+  title: string;
+  backArrow?: boolean | ReactNode;
+  showDonateOnLoad?: boolean;
+  showWeAppCodeOnLoad?: boolean;
+  onBack?: () => void;
+  className?: string;
+  buttonFill?: ButtonProps["fill"];
 }
 
 const Nav = ({
@@ -24,14 +24,14 @@ const Nav = ({
   showWeAppCodeOnLoad,
   onBack,
   className,
-  buttonFill = 'none',
+  buttonFill = "none",
 }: NavProps) => {
-  const [showDonateState, setShowDonateState] = useState(showDonateOnLoad)
-  const [showWeAppCode, setShowWeAppCode] = useState(showWeAppCodeOnLoad)
-  const [imageViewer, setImageViewer] = useState<string | null>(null)
+  const [showDonateState, setShowDonateState] = useState(showDonateOnLoad);
+  const [showWeAppCode, setShowWeAppCode] = useState(showWeAppCodeOnLoad);
+  const [imageViewer, setImageViewer] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!showDonateState) return
+    if (!showDonateState) return;
 
     Modal.alert({
       content: (
@@ -58,13 +58,13 @@ const Nav = ({
         </div>
       ),
       closeOnMaskClick: true,
-      confirmText: '关闭',
+      confirmText: "关闭",
       afterClose: () => setShowDonateState(false),
-    })
-  }, [showDonateState])
+    });
+  }, [showDonateState]);
 
   useEffect(() => {
-    if (!showWeAppCode) return
+    if (!showWeAppCode) return;
 
     Modal.alert({
       content: (
@@ -84,10 +84,10 @@ const Nav = ({
         </div>
       ),
       closeOnMaskClick: true,
-      confirmText: '关闭',
+      confirmText: "关闭",
       afterClose: () => setShowWeAppCode(false),
-    })
-  }, [showWeAppCode])
+    });
+  }, [showWeAppCode]);
 
   return (
     <>
@@ -121,15 +121,16 @@ const Nav = ({
 
       {showDonateOnLoad || showDonateState ? (
         <ImageViewer
+          // biome-ignore lint/style/noNonNullAssertion: 不可能为空，为空就该抛异常
           image={imageViewer!}
           visible={imageViewer !== null}
           onClose={() => {
-            setImageViewer(null)
+            setImageViewer(null);
           }}
         />
       ) : null}
     </>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;

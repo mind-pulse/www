@@ -1,14 +1,14 @@
-import { useEffect } from 'react'
-import { randomChoice } from '~/utils'
-import EptQuestion from './question'
-import { calculateEptResult } from '.'
+import { useEffect } from "react";
+import { randomChoice } from "~/utils";
+import { calculateEptResult } from ".";
+import EptQuestion from "./question";
 
 interface EptProps {
-  scale: Scale<EptQuestion, EptInterpretation>
-  currentIndex: number
-  values: EptValue[]
-  setValues: SetStateAction<EptValue[]>
-  setCalculateResult: SetStateAction<(values: EptValue[]) => EptResult>
+  scale: Scale<EptQuestion, EptInterpretation>;
+  currentIndex: number;
+  values: EptValue[];
+  setValues: SetStateAction<EptValue[]>;
+  setCalculateResult: SetStateAction<(values: EptValue[]) => EptResult>;
 }
 
 const EPTScale = ({
@@ -20,38 +20,39 @@ const EPTScale = ({
 }: EptProps) => {
   const updateValues = (index: number, value: EptValue) => {
     setValues((prev) => {
-      const arr = [...prev]
+      const arr = [...prev];
 
-      arr[index] = value
+      arr[index] = value;
 
-      return arr
-    })
-  }
+      return arr;
+    });
+  };
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
-    process.env.NODE_ENV === 'development' &&
+    process.env.NODE_ENV === "development" &&
       values.length < scale.questions.length &&
       scale.questions.forEach((v, i) => {
         updateValues(i, {
           type: v.type,
-          point: randomChoice(v.options, 'point'),
-        })
-      })
+          point: randomChoice(v.options, "point"),
+        });
+      });
 
     setCalculateResult(() => {
       return (vs: EptValue[]) => {
-        const result = calculateEptResult(vs)
+        const result = calculateEptResult(vs);
 
-        return result
-      }
-    })
-  }, [])
+        return result;
+      };
+    });
+  }, []);
 
   if (!scale || currentIndex === -1) {
-    return null
+    return null;
   }
 
-  const currentQuestion = scale.questions[currentIndex]
+  const currentQuestion = scale.questions[currentIndex];
 
   return (
     <EptQuestion
@@ -60,7 +61,7 @@ const EPTScale = ({
       value={values[currentIndex]}
       updateValues={updateValues}
     />
-  )
-}
+  );
+};
 
-export default EPTScale
+export default EPTScale;

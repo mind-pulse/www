@@ -1,10 +1,10 @@
-import { Badge } from 'antd-mobile'
-import type { ReactNode } from 'react'
+import { Badge } from "antd-mobile";
+import type { ReactNode } from "react";
 
 interface BadgeProps {
-  badge: ReactNode
-  content: ReactNode
-  right: number
+  badge: ReactNode;
+  content: ReactNode;
+  right: number;
 }
 
 const BaseBadge = ({ badge, content, right }: BadgeProps) => {
@@ -12,11 +12,11 @@ const BaseBadge = ({ badge, content, right }: BadgeProps) => {
     <Badge
       content={badge}
       color="#108ee9"
-      style={{ '--right': `-${right}px`, '--top': '8px' }}
+      style={{ "--right": `-${right}px`, "--top": "8px" }}
     >
       {content}
     </Badge>
-  )
-}
+  );
+};
 
-export default BaseBadge
+export default BaseBadge;

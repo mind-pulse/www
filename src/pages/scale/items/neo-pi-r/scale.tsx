@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Dialog, Form, Grid, Button, NoticeBar, Radio } from 'antd-mobile'
-import { getRandomIndex, randomChoice } from '~/utils'
-import Question from './question'
-import { calculateNEOPiRResult } from '.'
-import { useNavigate } from 'react-router-dom'
+import { Button, Dialog, Form, Grid, NoticeBar, Radio } from "antd-mobile";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getRandomIndex, randomChoice } from "~/utils";
+import { calculateNEOPiRResult } from ".";
+import Question from "./question";
 
 interface NEOPiRProps {
-  scale: Scale<NEOPiRQuestion, NEOPiRInterpretation>
-  currentIndex: number
-  values: NEOPiRValue[]
-  setValues: SetStateAction<NEOPiRValue[]>
-  setCalculateResult: SetStateAction<(values: NEOPiRValue[]) => NEOPiRResult>
+  scale: Scale<NEOPiRQuestion, NEOPiRInterpretation>;
+  currentIndex: number;
+  values: NEOPiRValue[];
+  setValues: SetStateAction<NEOPiRValue[]>;
+  setCalculateResult: SetStateAction<(values: NEOPiRValue[]) => NEOPiRResult>;
 }
 
 const NEOPiRScale = ({
@@ -20,57 +20,57 @@ const NEOPiRScale = ({
   setValues,
   setCalculateResult,
 }: NEOPiRProps) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [showDialog, setShowDialog] = useState(
-    import.meta.env.MODE === 'development' ? false : true,
-  )
-  const [gender, setGender] = useState<Gender | null>(null)
+    import.meta.env.MODE === "development" ? false : true,
+  );
+  const [gender, setGender] = useState<Gender | null>(null);
 
   const updateValues = (index: number, value: NEOPiRValue) => {
     setValues((prev) => {
-      const arr = [...prev]
+      const arr = [...prev];
 
-      arr[index] = value
+      arr[index] = value;
 
-      return arr
-    })
-  }
+      return arr;
+    });
+  };
 
   useEffect(() => {
-    if (!gender) return
+    if (!gender) return;
 
     setCalculateResult(() => {
       return (vs: NEOPiRValue[]) => {
-        const result = calculateNEOPiRResult(vs, gender, scale.interpretation)
+        const result = calculateNEOPiRResult(vs, gender, scale.interpretation);
 
-        return result
-      }
-    })
-  }, [gender, scale.interpretation, setCalculateResult])
+        return result;
+      };
+    });
+  }, [gender, scale.interpretation, setCalculateResult]);
 
   useEffect(() => {
     if (
-      import.meta.env.MODE === 'development' &&
+      import.meta.env.MODE === "development" &&
       values.length < scale.questions.length
     ) {
-      setGender(randomChoice(['male', 'female']))
+      setGender(randomChoice(["male", "female"]));
       scale.questions.forEach((v, i) => {
-        const idx = getRandomIndex(v.options)
+        const idx = getRandomIndex(v.options);
 
         updateValues(i, {
           dimension: v.dimension,
           subdimension: v.subdimension,
           point: v.options[idx].point,
-        })
-      })
+        });
+      });
     }
-  }, [])
+  }, []);
 
   if (!scale || currentIndex === -1) {
-    return null
+    return null;
   }
 
-  const currentQuestion = scale.questions[currentIndex]
+  const currentQuestion = scale.questions[currentIndex];
 
   return (
     <div>
@@ -92,7 +92,7 @@ const NEOPiRScale = ({
                     <Button
                       block
                       color="default"
-                      onClick={() => navigate('/', { replace: true })}
+                      onClick={() => navigate("/", { replace: true })}
                     >
                       取消
                     </Button>
@@ -117,7 +117,7 @@ const NEOPiRScale = ({
                 rules={[{ required: true }]}
               >
                 <Radio.Group onChange={(v) => setGender(v as keyof EpqRscNorm)}>
-                  <Radio value="male" style={{ marginRight: '1.5rem' }}>
+                  <Radio value="male" style={{ marginRight: "1.5rem" }}>
                     男
                   </Radio>
 
@@ -136,7 +136,7 @@ const NEOPiRScale = ({
         updateValues={updateValues}
       />
     </div>
-  )
-}
+  );
+};
 
-export default NEOPiRScale
+export default NEOPiRScale;

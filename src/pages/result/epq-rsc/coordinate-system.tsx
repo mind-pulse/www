@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from "react";
 
 interface CoordinateSystemProps {
-  E: number
-  N: number
-  color: string
+  E: number;
+  N: number;
+  color: string;
 }
 
 const EPQ_RSX_STANDARD = {
@@ -16,46 +16,46 @@ const EPQ_RSX_STANDARD = {
     veryLow: 38.5,
     veryHigh: 61.5,
   },
-}
+};
 
 const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
-  const divRef = useRef<HTMLDivElement>(null)
-  const [scale, setScale] = useState(1)
+  const divRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const current = divRef.current
-    if (!current) return
+    const current = divRef.current;
+    if (!current) return;
 
-    const divWidth = current.offsetWidth
-    setScale((divWidth - 20) / 90)
+    const divWidth = current.offsetWidth;
+    setScale((divWidth - 20) / 90);
 
     // You can use the divWidth to calculate and set the SVG transform or perform other actions
-  }, [divRef])
+  }, []);
 
-  const width = 80
-  const height = 80
+  const width = 80;
+  const height = 80;
   // 计算坐标系的中心点
-  const centerX = 40
-  const centerY = 50
-  const tickLength = 2 // 刻度线长度
-  const tickWidth = 0.2 // 刻度宽度
-  const axisWidth = 0.2 // 坐标轴宽度
-  const markLineWidth = 0.1 // 标记线宽度
-  const tickFontSize = 3 // 刻度值字体大小
+  const centerX = 40;
+  const centerY = 50;
+  const tickLength = 2; // 刻度线长度
+  const tickWidth = 0.2; // 刻度宽度
+  const axisWidth = 0.2; // 坐标轴宽度
+  const markLineWidth = 0.1; // 标记线宽度
+  const tickFontSize = 3; // 刻度值字体大小
 
-  const dasharray = 1 // 虚线单位长度和间距
+  const dasharray = 1; // 虚线单位长度和间距
 
   // 修改刻度值范围为[20, 80]
-  const xMin = 20
-  const xMax = 80
-  const yMin = 20
-  const yMax = 80
+  const xMin = 20;
+  const xMax = 80;
+  const yMin = 20;
+  const yMax = 80;
 
   const renderXAxisTicks = () => {
-    const ticks = []
+    const ticks = [];
     for (let x = xMin; x <= xMax; x += 5) {
-      if (x === 50) continue
-      const xPosition = centerX + (x - 50) // 调整X轴刻度位置
+      if (x === 50) continue;
+      const xPosition = centerX + (x - 50); // 调整X轴刻度位置
       ticks.push(
         <line
           key={`x-tick-${x}`}
@@ -66,7 +66,7 @@ const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
           stroke="black"
           strokeWidth={tickWidth}
         />,
-      )
+      );
       if (x % 10 === 0) {
         ticks.push(
           <text
@@ -78,17 +78,17 @@ const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
           >
             {x}
           </text>,
-        )
+        );
       }
     }
-    return ticks
-  }
+    return ticks;
+  };
 
   const renderYAxisTicks = () => {
-    const ticks = []
+    const ticks = [];
     for (let y = yMin; y <= yMax; y += 5) {
-      if (y === 50) continue
-      const yPosition = centerY - (y - 50) // 调整Y轴刻度位置
+      if (y === 50) continue;
+      const yPosition = centerY - (y - 50); // 调整Y轴刻度位置
       ticks.push(
         <line
           key={`y-tick-${y}`}
@@ -99,7 +99,7 @@ const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
           stroke="black"
           strokeWidth={tickWidth}
         />,
-      )
+      );
       if (y % 10 === 0) {
         ticks.push(
           <text
@@ -111,14 +111,15 @@ const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
           >
             {y}
           </text>,
-        )
+        );
       }
     }
-    return ticks
-  }
+    return ticks;
+  };
 
   return (
     <div ref={divRef} id="coordinate-system-container">
+      {/* biome-ignore lint/a11y/noSvgWithoutTitle: 不需要标题 */}
       <svg
         width={width + 10}
         height={height + 10}
@@ -279,7 +280,7 @@ const CoordinateSystem = ({ E, N, color }: CoordinateSystemProps) => {
         </text>
       </svg>
     </div>
-  )
-}
+  );
+};
 
-export default CoordinateSystem
+export default CoordinateSystem;

@@ -1,18 +1,18 @@
-import { useLocation } from 'react-router-dom'
-import { NoticeBar, Collapse, Tag } from 'antd-mobile'
-import { getTemperament } from '~/pages/scale/items/epq-rsc'
-import CoordinateSystem from './coordinate-system'
-import './index.scss'
-import suspense from '~/advance/suspense'
-import { LazyBadge } from '~/pages'
+import { Collapse, NoticeBar, Tag } from "antd-mobile";
+import { useLocation } from "react-router-dom";
+import { getTemperament } from "~/pages/scale/items/epq-rsc";
+import CoordinateSystem from "./coordinate-system";
+import "./index.scss";
+import suspense from "~/advance/suspense";
+import { LazyBadge } from "~/pages";
 
 const EpqRscResult = () => {
-  const location = useLocation()
+  const location = useLocation();
   const {
     result,
     interpretation,
   }: { interpretation: EpqRscInterpretation; result: EpqRscResult } =
-    location.state
+    location.state;
 
   const getInterpretation = (
     dimension: EpqRscDimension,
@@ -20,27 +20,27 @@ const EpqRscResult = () => {
   ): string[] => {
     switch (level) {
       case 0:
-        return interpretation.dimensions[dimension].dimension.osculant
+        return interpretation.dimensions[dimension].dimension.osculant;
       case 1:
-        return interpretation.dimensions[dimension].dimension.inclined.high
+        return interpretation.dimensions[dimension].dimension.inclined.high;
       case 2:
-        return interpretation.dimensions[dimension].dimension.typical.high
+        return interpretation.dimensions[dimension].dimension.typical.high;
       case -1:
-        return interpretation.dimensions[dimension].dimension.inclined.low
+        return interpretation.dimensions[dimension].dimension.inclined.low;
       case -2:
-        return interpretation.dimensions[dimension].dimension.typical.low
+        return interpretation.dimensions[dimension].dimension.typical.low;
     }
-  }
+  };
 
   const temperament = getTemperament(
     result.E.score,
     result.N.score,
     interpretation.temperaments,
-  )
+  );
 
   return (
     <div className="container text">
-      <Collapse defaultActiveKey={['coordinate-system']}>
+      <Collapse defaultActiveKey={["coordinate-system"]}>
         {(Object.keys(result) as EpqRscDimension[]).map((k) => (
           <Collapse.Panel
             key={k}
@@ -49,10 +49,10 @@ const EpqRscResult = () => {
                 <Tag
                   color={
                     result[k].kind.level === 0
-                      ? 'success'
+                      ? "success"
                       : Math.abs(result[k].kind.level) === 1
-                      ? 'warning'
-                      : 'danger'
+                        ? "warning"
+                        : "danger"
                   }
                   className="qualitative"
                 >
@@ -77,13 +77,13 @@ const EpqRscResult = () => {
             ) : null}
 
             {getInterpretation(k, result[k].kind.level).map((s, i) => (
-              <div key={i} className="indent">
+              <div key={i.toString()} className="indent">
                 {s}
               </div>
             ))}
 
             {interpretation.dimensions[k].supplementary?.map((s, i) => (
-              <div key={i} className="indent">
+              <div key={i.toString()} className="indent">
                 {s}
               </div>
             ))}
@@ -111,7 +111,7 @@ const EpqRscResult = () => {
             </div>
 
             {temperament.desc.map((s, i) => (
-              <div key={i} className="indent">
+              <div key={i.toString()} className="indent">
                 {s}
               </div>
             ))}
@@ -119,7 +119,7 @@ const EpqRscResult = () => {
         </Collapse.Panel>
       </Collapse>
     </div>
-  )
-}
+  );
+};
 
-export default EpqRscResult
+export default EpqRscResult;

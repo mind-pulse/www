@@ -1,10 +1,10 @@
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends CommonQuestion {
-  value?: number
-  updateValues: (index: number, point: number) => void
-  index: number
+  value?: number;
+  updateValues: (index: number, point: number) => void;
+  index: number;
 }
 
 const CommonQuestion = ({
@@ -15,8 +15,8 @@ const CommonQuestion = ({
   updateValues,
 }: QuestionProps) => {
   const handleChange = (v: number) => {
-    updateValues(index, v)
-  }
+    updateValues(index, v);
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -27,7 +27,7 @@ const CommonQuestion = ({
       options={options}
       useIndex={false}
     />,
-  )
-}
+  );
+};
 
-export default CommonQuestion
+export default CommonQuestion;

@@ -1,10 +1,10 @@
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends NEOPiRQuestion {
-  value?: NEOPiRValue
-  updateValues: (index: number, value: NEOPiRValue) => void
-  index: number
+  value?: NEOPiRValue;
+  updateValues: (index: number, value: NEOPiRValue) => void;
+  index: number;
 }
 
 const NEOPiRQuestion = ({
@@ -21,8 +21,8 @@ const NEOPiRQuestion = ({
       dimension,
       subdimension,
       point,
-    })
-  }
+    });
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -33,7 +33,7 @@ const NEOPiRQuestion = ({
       options={options}
       useIndex={false}
     />,
-  )
-}
+  );
+};
 
-export default NEOPiRQuestion
+export default NEOPiRQuestion;

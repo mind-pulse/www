@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { calculate, randomChoice } from "~/utils";
 import Question from "~/pages/scale/items/common/question";
+import { calculate, randomChoice } from "~/utils";
 
 interface CommonProps {
   scale: Scale<CommonQuestion, CommonInterpretation>;

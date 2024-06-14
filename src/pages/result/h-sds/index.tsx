@@ -1,17 +1,17 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Divider, ResultPage, Card, Badge } from 'antd-mobile'
-import { Chart, Axis, Line, Point, Area } from '@antv/f2'
-import Canvas from '@antv/f2-react'
-import { max } from '~/utils'
-import './index.scss'
+import { Area, Axis, Chart, Line, Point } from "@antv/f2";
+import Canvas from "@antv/f2-react";
+import { Badge, Card, Divider, ResultPage } from "antd-mobile";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { max } from "~/utils";
+import "./index.scss";
 
 interface CapacityCategory extends HSDSCapacityCategoryInterpretation {
-  score: number
+  score: number;
 }
 
 interface RadarProps {
-  data: CapacityCategory[]
+  data: CapacityCategory[];
 }
 
 const Radar = ({ data }: RadarProps) => {
@@ -23,7 +23,8 @@ const Radar = ({ data }: RadarProps) => {
         scale={{
           score: {
             min: 0,
-            max: max(data, 'score')!.score,
+            // biome-ignore lint/style/noNonNullAssertion: 不能为 null
+            max: max(data, "score")!.score,
             tickCount: 4,
           },
         }}
@@ -34,7 +35,7 @@ const Radar = ({ data }: RadarProps) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           formatter={(s: string, idx: number) => {
-            return `${data[idx].name}(${s})`
+            return `${data[idx].name}(${s})`;
           }}
         />
         <Axis field="score" grid="line" />
@@ -43,84 +44,86 @@ const Radar = ({ data }: RadarProps) => {
         <Point x="capacity_category" y="score" />
       </Chart>
     </Canvas>
-  )
-}
+  );
+};
 
 const WARNING =
-  '您的职业代码不在职业信息列表中，可能是您的高得分维度不相邻，此结果可能不具有参考性。'
+  "您的职业代码不在职业信息列表中，可能是您的高得分维度不相邻，此结果可能不具有参考性。";
 
 const Result = () => {
-  const location = useLocation()
+  const location = useLocation();
   const {
     result,
     interpretation,
-  }: { result: HSDSResult; interpretation: HSDSInterpretation } = location.state
+  }: { result: HSDSResult; interpretation: HSDSInterpretation } =
+    location.state;
 
-  const [careerCode, setCareerCode] = useState('')
-  const [career, setCareer] = useState<string | null>(null)
-  const [data, setData] = useState<RadarProps['data'] | null>(null)
+  const [careerCode, setCareerCode] = useState("");
+  const [career, setCareer] = useState<string | null>(null);
+  const [data, setData] = useState<RadarProps["data"] | null>(null);
 
-  const [status, setStatus] = useState<'success' | 'warning'>('success')
+  const [status, setStatus] = useState<"success" | "warning">("success");
 
-  const [top3Careers, setTop3Careers] = useState<RadarProps['data'] | null>(
+  const [top3Careers, setTop3Careers] = useState<RadarProps["data"] | null>(
     null,
-  )
+  );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: 挂载时运行，不需要依赖
   useEffect(() => {
     setCareerCode(
       result
         .slice(0, 3)
         .map((v) => v.capacity_category)
-        .join(''),
-    )
+        .join(""),
+    );
 
     setData(
       interpretation.capacity_category_interpretations.map((item) => {
+        // biome-ignore lint/style/noNonNullAssertion: 不能为 null
         const itt = result.find(
           (v) => v.capacity_category === item.capacity_category,
-        )!
+        )!;
 
         return {
           score: itt.total,
           ...item,
-        }
+        };
       }),
-    )
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    );
+  }, []);
 
   useEffect(() => {
-    if (!data) return
+    if (!data) return;
 
-    const sortedData = [...data].sort((a, b) => b.score - a.score)
+    const sortedData = [...data].sort((a, b) => b.score - a.score);
 
-    setTop3Careers(sortedData.slice(0, 3))
-  }, [data])
+    setTop3Careers(sortedData.slice(0, 3));
+  }, [data]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies:
   useEffect(() => {
-    if (!careerCode) return
+    if (!careerCode) return;
 
     const career = interpretation.career_information.find(
       (v) => v.code === careerCode,
-    )
+    );
 
     if (!career) {
-      setStatus('warning')
-      return
+      setStatus("warning");
+      return;
     }
 
-    setCareer(career.information)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [careerCode])
+    setCareer(career.information);
+  }, [careerCode]);
 
   return (
     <ResultPage
       status={status}
-      title={'职业兴趣代码：' + careerCode}
+      title={`职业兴趣代码：${careerCode}`}
       description={career ?? WARNING}
-      style={{ flex: 1, minHeight: 'inherit' }}
+      style={{ flex: 1, minHeight: "inherit" }}
     >
-      <ResultPage.Card style={{ height: '20rem' }}>
+      <ResultPage.Card style={{ height: "20rem" }}>
         {data ? <Radar data={data} /> : null}
       </ResultPage.Card>
 
@@ -134,9 +137,9 @@ const Result = () => {
             <Badge
               content={item.score}
               color="#108ee9"
-              style={{ right: '-10px', top: '5px' }}
+              style={{ right: "-10px", top: "5px" }}
             >
-              <div style={{ fontWeight: 'bold' }}>
+              <div style={{ fontWeight: "bold" }}>
                 {item.name}({item.capacity_category})
               </div>
             </Badge>
@@ -153,7 +156,7 @@ const Result = () => {
         </Card>
       ))}
     </ResultPage>
-  )
-}
+  );
+};
 
-export default Result
+export default Result;

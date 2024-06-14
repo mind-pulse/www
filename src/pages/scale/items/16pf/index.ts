@@ -2,9 +2,11 @@ export const calculate16PFResult = (values: SPFValue[]): SPFResult => {
   const initValues = values.reduce(
     (o, cv) => {
       if (cv.factor) {
-        o[cv.factor] === undefined
-          ? (o[cv.factor] = cv.point)
-          : (o[cv.factor] += cv.point);
+        if (o[cv.factor] === undefined) {
+          o[cv.factor] = cv.point;
+        } else {
+          o[cv.factor] += cv.point;
+        }
       }
 
       return o;

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { getRandomIndex } from "~/utils";
-import Question from "./question";
 import { calculate16PFResult } from ".";
+import Question from "./question";
 
 interface SPFProps {
   scale: Scale<SPFQuestion, SPFInterpretation>;

@@ -1,15 +1,15 @@
-import { useEffect } from 'react'
-import suspense from '~/advance/suspense'
-import { LazyYBocsQuestion } from '~/pages'
-import { sum } from '~/utils'
+import { useEffect } from "react";
+import suspense from "~/advance/suspense";
+import { LazyYBocsQuestion } from "~/pages";
+import { sum } from "~/utils";
 
 interface YBocsProps {
-  scale: Scale<CommonQuestion, CommonInterpretation>
-  currentIndex: number
-  setCurrentIndex: SetStateAction<number>
-  values: number[]
-  setValues: SetStateAction<number[]>
-  setCalculateResult: SetStateAction<(values: number[]) => YBocsResult>
+  scale: Scale<CommonQuestion, CommonInterpretation>;
+  currentIndex: number;
+  setCurrentIndex: SetStateAction<number>;
+  values: number[];
+  setValues: SetStateAction<number[]>;
+  setCalculateResult: SetStateAction<(values: number[]) => YBocsResult>;
 }
 
 const YBocsScale = ({
@@ -22,35 +22,35 @@ const YBocsScale = ({
 }: YBocsProps) => {
   const updateValues = (index: number, point: number) => {
     setValues((prev) => {
-      const arr = [...prev]
+      const arr = [...prev];
 
-      arr[index] = point
+      arr[index] = point;
 
-      return arr
-    })
-  }
+      return arr;
+    });
+  };
 
   useEffect(() => {
     setCalculateResult(() => {
       return (numbers: number[]): YBocsResult => {
-        const thinking = sum(numbers.slice(0, 5))
-        const behavior = sum(numbers.slice(5))
-        const total = thinking + behavior
+        const thinking = sum(numbers.slice(0, 5));
+        const behavior = sum(numbers.slice(5));
+        const total = thinking + behavior;
 
         return {
           thinking,
           behavior,
           total,
-        }
-      }
-    })
-  }, [])
+        };
+      };
+    });
+  }, []);
 
   if (!scale || currentIndex === -1) {
-    return null
+    return null;
   }
 
-  const currentQuestion = scale.questions[currentIndex]
+  const currentQuestion = scale.questions[currentIndex];
 
   return suspense(
     <LazyYBocsQuestion
@@ -60,7 +60,7 @@ const YBocsScale = ({
       updateValues={updateValues}
       setIndex={setCurrentIndex}
     />,
-  )
-}
+  );
+};
 
-export default YBocsScale
+export default YBocsScale;

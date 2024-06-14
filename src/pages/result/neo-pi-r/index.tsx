@@ -1,23 +1,23 @@
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import {
   Button,
+  Card,
   Collapse,
   Divider,
   NoticeBar,
   Popup,
   ResultPage,
-  Card,
-} from 'antd-mobile'
-import GradientLine from '../components/gradient-line'
-import Radar from '../components/radar.tsx'
-import { generateLinearColors, Color } from '~/utils'
-import './index.scss'
+} from "antd-mobile";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Color, generateLinearColors } from "~/utils";
+import GradientLine from "../components/gradient-line";
+import Radar from "../components/radar.tsx";
+import "./index.scss";
 
 interface SubdimensionInterpretationProps {
-  close: () => void
-  subdimensionInterpretations: NEOPiRSubdimensionInterpretation[]
-  subdimensionResult: { [K in NEOPiRSubdimension]: NEOPiRResultItem }
+  close: () => void;
+  subdimensionInterpretations: NEOPiRSubdimensionInterpretation[];
+  subdimensionResult: { [K in NEOPiRSubdimension]: NEOPiRResultItem };
 }
 
 const SubdimensionInterpretation = ({
@@ -37,9 +37,9 @@ const SubdimensionInterpretation = ({
           {subdimensionInterpretations.map((sd) => (
             <Collapse.Panel
               key={sd.dimension}
-              title={sd.name + '(' + sd.dimension + ')'}
+              title={sd.name + "(" + sd.dimension + ")"}
             >
-              <div style={{ marginBottom: '1rem' }}>{sd.description}</div>
+              <div style={{ marginBottom: "1rem" }}>{sd.description}</div>
 
               <Divider>得分</Divider>
 
@@ -60,33 +60,33 @@ const SubdimensionInterpretation = ({
         </Collapse>
       </div>
     </Popup>
-  )
-}
+  );
+};
 
 const Result = () => {
-  const location = useLocation()
+  const location = useLocation();
   const {
     result,
     interpretation,
   }: { result: NEOPiRResult; interpretation: NEOPiRInterpretation } =
-    location.state
+    location.state;
 
   const [subProps, setSubProps] = useState<NEOPiRSubdimensionInterpretation[]>(
     [],
-  )
+  );
 
-  const closeSub = () => setSubProps([])
+  const closeSub = () => setSubProps([]);
 
   return (
     <ResultPage
       status="success"
       title="大五人格测试结果"
-      style={{ flex: 1, minHeight: 'inherit' }}
+      style={{ flex: 1, minHeight: "inherit" }}
     >
-      <ResultPage.Card style={{ height: '20rem', marginTop: 12 }}>
+      <ResultPage.Card style={{ height: "20rem", marginTop: 12 }}>
         <Radar
           data={interpretation.dimensions.map((d) => ({
-            item: d.name.includes('/') ? d.name.split('/')[0] : d.name,
+            item: d.name.includes("/") ? d.name.split("/")[0] : d.name,
             fields: {
               value: result.dimensions[d.dimension].transformRule.value,
             },
@@ -112,15 +112,15 @@ const Result = () => {
         />
 
         {interpretation.dimensions.map((d) => {
-          const resultItem = result.dimensions[d.dimension]
+          const resultItem = result.dimensions[d.dimension];
 
           return (
             <Card
               key={d.dimension}
               style={{ marginTop: 12 }}
-              title={d.name + '(' + d.dimension + ')'}
+              title={d.name + "(" + d.dimension + ")"}
             >
-              <div className="indent" style={{ marginBottom: '1rem' }}>
+              <div className="indent" style={{ marginBottom: "1rem" }}>
                 {d.description}
               </div>
 
@@ -145,13 +145,13 @@ const Result = () => {
                   size="small"
                   color="primary"
                   fill="outline"
-                  style={{ float: 'right' }}
+                  style={{ float: "right" }}
                 >
                   查看子维度
                 </Button>
               </div>
             </Card>
-          )
+          );
         })}
 
         <SubdimensionInterpretation
@@ -161,7 +161,7 @@ const Result = () => {
         />
       </div>
     </ResultPage>
-  )
-}
+  );
+};
 
-export default Result
+export default Result;

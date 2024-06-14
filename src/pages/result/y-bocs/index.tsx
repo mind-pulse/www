@@ -10,15 +10,16 @@ const Result = () => {
   }: { result: YBocsResult; interpretation: YBocsInterpretation } =
     location.state;
 
+  // biome-ignore lint/style/noNonNullAssertion: 为空时就该抛异常
   const interpretation = interpretationItems.find(
     (item) =>
       (result.total >= item.range.total[0] &&
         result.total <= item.range.total[1]) ||
       (result.behavior > result.thinking
         ? result.behavior >= item.range.any[0] &&
-        result.behavior <= item.range.any[1]
+          result.behavior <= item.range.any[1]
         : result.thinking >= item.range.any[0] &&
-        result.thinking <= item.range.any[1]),
+          result.thinking <= item.range.any[1]),
   )!;
 
   const { description, label, advice, status } = interpretation;
@@ -42,7 +43,7 @@ const Result = () => {
 
           <div className="text-box">
             {description.map((s, i) => (
-              <div className="symptom-text indent" key={i}>
+              <div className="symptom-text indent" key={i.toString()}>
                 {s}
               </div>
             ))}
@@ -56,7 +57,7 @@ const Result = () => {
 
           <div className="text-box">
             {advice.map((s, i) => (
-              <div key={i} className="indent">
+              <div key={i.toString()} className="indent">
                 {s}
               </div>
             ))}

@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import type { ReactNode } from "react";
-import { Tabs } from "antd-mobile";
 import { useThrottleFn } from "ahooks";
+import { Tabs } from "antd-mobile";
+import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import "./tab.scss";
 
 const tabHeight = 42;
@@ -40,6 +40,7 @@ const FactorTab = ({ items }: FactorTabProps) => {
     },
   );
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies(handleScroll): only run on mount
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -59,14 +60,14 @@ const FactorTab = ({ items }: FactorTabProps) => {
             });
           }}
         >
-          {items.map((item, idx) => (
-            <Tabs.Tab title={item.title} key={idx} />
+          {items.map((item) => (
+            <Tabs.Tab title={item.title} key={item.title} />
           ))}
         </Tabs>
       </div>
 
       {items.map((item, idx) => (
-        <div key={idx}>
+        <div key={item.title}>
           <h2 id={`anchor-${idx}`}>{item.title}</h2>
           {item.content}
         </div>

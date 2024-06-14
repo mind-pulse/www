@@ -1,4 +1,4 @@
-import { Footer } from 'antd-mobile'
+import { Footer } from "antd-mobile";
 
 const SiteFooter = () => (
   <Footer
@@ -9,6 +9,6 @@ const SiteFooter = () => (
       </>
     }
   />
-)
+);
 
-export default SiteFooter
+export default SiteFooter;

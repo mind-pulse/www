@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react'
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import { useEffect, useState } from "react";
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends EptQuestion {
-  value?: EptValue
-  updateValues: (index: number, value: EptValue) => void
-  index: number
+  value?: EptValue;
+  updateValues: (index: number, value: EptValue) => void;
+  index: number;
 }
 
 const EptQuestion = ({
@@ -16,17 +16,18 @@ const EptQuestion = ({
   value,
   updateValues,
 }: QuestionProps) => {
-  const [selected, setSelected] = useState<number | undefined>(value?.point)
+  const [selected, setSelected] = useState<number | undefined>(value?.point);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: index 和 title 变化时需要重新获取 value.point
   useEffect(() => {
-    setSelected(value?.point)
-  }, [index, title, value])
+    setSelected(value?.point);
+  }, [index, title, value]);
 
   const handleChange = (v: number) => {
-    setSelected(v)
+    setSelected(v);
 
-    updateValues(index, { type, point: v })
-  }
+    updateValues(index, { type, point: v });
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -37,7 +38,7 @@ const EptQuestion = ({
       options={options}
       useIndex={false}
     />,
-  )
-}
+  );
+};
 
-export default EptQuestion
+export default EptQuestion;

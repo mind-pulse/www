@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
-import suspense from '~/advance/suspense'
-import { LazyQuestion } from '~/pages'
+import { useEffect, useState } from "react";
+import suspense from "~/advance/suspense";
+import { LazyQuestion } from "~/pages";
 
 interface QuestionProps extends EpqRscQuestion {
-  value?: EpqRscValue // 默认值或已选择值
-  updateValues: (index: number, value: EpqRscValue) => void
-  index: number
+  value?: EpqRscValue; // 默认值或已选择值
+  updateValues: (index: number, value: EpqRscValue) => void;
+  index: number;
 }
 
 const EqpRscQuestion = ({
@@ -16,17 +16,17 @@ const EqpRscQuestion = ({
   value,
   updateValues,
 }: QuestionProps) => {
-  const [selected, setSelected] = useState<number | undefined>(value?.point)
+  const [selected, setSelected] = useState<number | undefined>(value?.point);
 
   useEffect(() => {
-    setSelected(value?.point)
-  }, [index, title, value])
+    setSelected(value?.point);
+  }, [index, title, value]);
 
   const handleChange = (v: number) => {
-    setSelected(v)
+    setSelected(v);
 
-    updateValues(index, { dimension, point: v })
-  }
+    updateValues(index, { dimension, point: v });
+  };
 
   return suspense(
     <LazyQuestion<false>
@@ -37,7 +37,7 @@ const EqpRscQuestion = ({
       options={options}
       useIndex={false}
     />,
-  )
-}
+  );
+};
 
-export default EqpRscQuestion
+export default EqpRscQuestion;

@@ -1,41 +1,42 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import 'antd-mobile/es/global'
-import { LazyHome, LazyResult, LazyScale } from '~/pages'
-import suspense from '~/advance/suspense'
-import '~/index.scss'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "antd-mobile/es/global";
+import suspense from "~/advance/suspense";
+import { LazyHome, LazyResult, LazyScale } from "~/pages";
+import "~/index.scss";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: suspense(<LazyHome />),
   },
   {
-    path: '/scale',
+    path: "/scale",
     children: [
       {
-        path: ':path',
+        path: ":path",
         element: suspense(<LazyScale />),
       },
     ],
   },
   {
-    path: '/result',
+    path: "/result",
     children: [
       {
-        path: ':path',
+        path: ":path",
         element: suspense(<LazyResult />),
       },
     ],
   },
-])
+]);
 
-window.matchMedia('(prefers-color-scheme: dark)').matches &&
-  document.documentElement.setAttribute('data-prefers-color-scheme', 'dark')
+window.matchMedia("(prefers-color-scheme: dark)").matches &&
+  document.documentElement.setAttribute("data-prefers-color-scheme", "dark");
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+// biome-ignore lint/style/noNonNullAssertion: root can not be null
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>,
-)
+);
