@@ -1,0 +1,18 @@
+#coordinate-system-container {
+  width: calc(100% - 1rem);
+  height: auto;
+  aspect-ratio: 1;
+  text-align: center;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    display: block;
+    transform-origin: center;
+  }
+}

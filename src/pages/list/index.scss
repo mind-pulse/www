@@ -1,0 +1,35 @@
+.tags {
+  > :not(:last-child) {
+    margin-right: 5px;
+  }
+}
+
+.introduction {
+  font-size: 0.8rem;
+  color: #6f6f6f;
+}
+
+.list {
+  &__item {
+    background-color: var(--background-color);
+
+    .adm-list-item-content {
+      border-top: none;
+    }
+
+    .adm-notice-bar {
+      font-size: 0.8rem;
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      &-statistics-times {
+        font-size: 0.8rem;
+        color: var(--adm-color-weak);
+      }
+    }
+  }
+}

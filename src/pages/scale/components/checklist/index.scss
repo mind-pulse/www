@@ -1,0 +1,39 @@
+.check-list {
+  @media (prefers-color-scheme: dark) {
+    --background-color: #000;
+    --inactive-color: #444;
+    --text-color: #919191;
+  }
+
+  @media (prefers-color-scheme: light) {
+    --background-color: #e7f1ff;
+    --inactive-color: #f6f6f6;
+    --text-color: var(--adm-color-text);
+  }
+
+  --height: 32px;
+
+  .checkbox {
+    background-color: var(--inactive-color);
+    border: 1px solid var(--inactive-color);
+    border-radius: calc(var(--height) / 2);
+    padding: 6px 10px;
+    display: flex;
+    align-items: center;
+    color: var(--text-color);
+
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
+  }
+
+  .active {
+    background-color: var(--background-color);
+    color: var(--adm-color-primary);
+    border: 1px solid var(--adm-color-primary);
+  }
+
+  .center {
+    justify-content: center;
+  }
+}

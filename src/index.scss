@@ -1,0 +1,65 @@
+:root {
+  --background-color: var(--adm-color-box, #f7f8fa);
+  --adm-mask-z-index: 1100;
+  --adm-popup-z-index: 1100;
+
+  background-color: var(--background-color);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --shadow-color: rgb(237, 238, 241);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-color: #000;
+  }
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.adm-nav-bar {
+  background-color: var(--adm-color-box);
+}
+
+.container {
+  padding: 1rem;
+  flex: 1;
+}
+
+.indent {
+  text-indent: 2em;
+
+  &:not(:first-child) {
+    margin-top: 0.5rem;
+  }
+}
+
+.qualitative {
+  margin-right: 0.5rem;
+}
+
+.average {
+  font-family: monospace;
+}
+
+// 强调字体，加粗、黑色
+.emphasize {
+  font-weight: bold;
+  color: var(--adm-color-text);
+}
+
+.adm-card {
+  box-shadow: 0px 1px 7px 0px var(--shadow-color);
+}

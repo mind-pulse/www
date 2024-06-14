@@ -1,0 +1,15 @@
+.badge {
+  &__int {
+    --right: -10px;
+    --top: 8px;
+  }
+
+  &__float {
+    --right: -15px;
+    --top: 8px;
+  }
+}
+
+.result-notice {
+  margin-bottom: 1rem;
+}

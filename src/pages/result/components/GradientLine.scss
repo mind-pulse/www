@@ -1,0 +1,40 @@
+.gradient-line-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.left-text,
+.right-text {
+  flex: 1;
+  text-align: center;
+}
+
+.gradient-line {
+  flex: 3;
+  height: 10px;
+  position: relative;
+}
+
+.marker {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  /* 设置标记颜色，可以根据需要调整 */
+  border: 2px solid var(--adm-color-box);
+  /* 设置标记边框颜色，可以根据需要调整 */
+}
+
+.detail {
+  padding: 1rem;
+
+  .title {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--adm-color-text);
+  }
+}
