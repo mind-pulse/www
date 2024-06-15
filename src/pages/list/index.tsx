@@ -43,7 +43,8 @@ const Index = () => {
         return;
       }
 
-      setList(data);
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      setList(data!);
     };
 
     const getStatistics = async () => {
@@ -54,7 +55,8 @@ const Index = () => {
         return;
       }
 
-      setStatistics(data);
+      // biome-ignore lint/style/noNonNullAssertion: <explanation>
+      setStatistics(data!);
     };
 
     Promise.all([getList(), getStatistics()]);
