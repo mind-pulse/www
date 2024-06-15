@@ -103,7 +103,7 @@ const Index = () => {
                   className="introduction"
                   direction="end"
                   rows={3}
-                  content={v.introduction}
+                  content={v.introduction.join("")}
                   expandText="展开"
                   collapseText="收起"
                   onContentClick={onContentClick}
