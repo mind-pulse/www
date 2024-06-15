@@ -34,6 +34,7 @@ const Nav = ({
     if (!showDonateState) return;
 
     Modal.alert({
+      className: "qr-code-modal",
       content: (
         <div id="donate">
           <div className="indent" style={{ marginBottom: 12 }}>
@@ -67,6 +68,7 @@ const Nav = ({
     if (!showWeAppCode) return;
 
     Modal.alert({
+      className: "qr-code-modal",
       content: (
         <div id="weapp-code">
           <div className="indent" style={{ marginBottom: 12 }}>
