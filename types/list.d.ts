@@ -8,7 +8,7 @@ interface Tag {
 interface ListItem {
   name: string;
   path: string;
-  introduction: string[];
+  introduction: Texts;
   disabled?: boolean;
   warning?: string;
   tags: Tag;

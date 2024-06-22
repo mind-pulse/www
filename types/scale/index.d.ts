@@ -116,10 +116,10 @@ type CommonInterpretation = InterpretationItem[];
 interface Scale<T, I> {
   name: string;
   abbreviation: string;
-  instruction?: string[];
+  instruction?: Texts;
   questions: T[];
   interpretation: I;
-  introduction: string[];
+  introduction: Texts;
   references?: string[];
   warning?: string;
   formula_mode?: FormulaMode;
@@ -129,7 +129,7 @@ interface Scale<T, I> {
 interface QuestionListItem {
   name: string;
   path: string;
-  introduction: string;
+  introduction: Texts;
   warning: string | null;
   tags: Tag;
   disabled: boolean;
@@ -153,3 +153,26 @@ interface ComparisonArg {
   value: number;
   operator: ComparisonOperator;
 }
+
+interface BaseRichText {
+  text: string;
+}
+
+interface StrongText extends BaseRichText {
+  type: "STRONG";
+}
+
+interface MarkText extends BaseRichText {
+  type: "MARK";
+}
+
+interface AText extends BaseRichText {
+  type: "A";
+  href: string;
+}
+
+type RichText = StrongText | MarkText | AText; // server: HTMLElement
+
+type SentenceItem = string | RichText;
+type Sentence = SentenceItem[];
+type Texts = Sentence[];

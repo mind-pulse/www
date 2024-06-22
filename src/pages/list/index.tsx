@@ -16,6 +16,7 @@ import { LazyFooter } from "~/pages";
 import { api, isPC } from "~/utils";
 import "./index.scss";
 import Nav from "~/components/nav";
+import { texts2string } from "../utils";
 
 const tagNames: Record<keyof Tag, string> = {
   info: "primary",
@@ -103,7 +104,7 @@ const Index = () => {
                   className="introduction"
                   direction="end"
                   rows={3}
-                  content={v.introduction.join("")}
+                  content={texts2string(v.introduction)}
                   expandText="展开"
                   collapseText="收起"
                   onContentClick={onContentClick}

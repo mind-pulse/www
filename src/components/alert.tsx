@@ -75,7 +75,7 @@ const Alert = ({
                     {s}
                   </div>
                 ) : (
-                  <div key={i.toString()}>{s}</div>
+                  s
                 ),
             )}
           </div>

@@ -73,9 +73,12 @@ const Nav = ({
         <div id="weapp-code">
           <div className="indent" style={{ marginBottom: 12 }}>
             <div>
-              本网站微信小程序已上线，不需记住本网站，可直接扫码进入测试，或在微信小程序中搜索“知己心理轻测”。
+              本网站微信小程序已上线，不需记住本网站，可直接扫码进入测试，或在微信小程序中搜索“
+              <strong>知己心理轻测</strong>”。
             </div>
-            <div>关闭此窗口后您可以点击网页左上角的“小程序”按钮重新打开。</div>
+            <div style={{ marginTop: "5px" }}>
+              关闭此窗口后您可以点击网页左上角的“小程序”按钮重新打开。
+            </div>
           </div>
 
           <Image

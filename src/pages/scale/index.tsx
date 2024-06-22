@@ -19,6 +19,7 @@ import { api } from "~/utils";
 import "./index.scss";
 import Alert from "~/components/alert";
 import Nav from "~/components/nav";
+import { texts2element } from "../utils";
 
 const Scale = () => {
   const { path } = useParams() as { path: Path };
@@ -129,7 +130,7 @@ const Scale = () => {
     if (!scale.instruction && !scale.warning) return;
 
     setInstruction((pre) => {
-      if (scale.instruction) return [...pre, ...scale.instruction];
+      if (scale.instruction) return [...pre, texts2element(scale.instruction)];
 
       if (scale.warning) return [...pre, scale.warning];
 
