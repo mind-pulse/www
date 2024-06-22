@@ -116,7 +116,7 @@ type CommonInterpretation = InterpretationItem[];
 interface Scale<T, I> {
   name: string;
   abbreviation: string;
-  instruction?: Texts;
+  instruction: Texts;
   questions: T[];
   interpretation: I;
   introduction: Texts;
